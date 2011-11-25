@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+	mavenCentral()
+}
+
+slf4jVersion = '1.6.1'
+dependencies {
+  // dependencies for spring mvc
+  compile 'org.springframework:spring-webmvc:3.0.6.RELEASE'
+  compile 'org.springframework:spring-jdbc:3.0.6.RELEASE'
+  compile 'cglib:cglib:2.2.2'
+  
+  // slf4j so we can have some awesome logging
+  compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+  compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
+
+  // runtime dependency on h2 so jetty can load it into jndi
+  providedRuntime 'com.h2database:h2:1.3.161'
+  providedRuntime 'commons-dbcp:commons-dbcp:1.4'
+}
+
+/**
+* Build script depedency on h2 so that
+* we can initialize the H2 server on startup
+*/
+buildscript {
+   repositories {
+	   mavenCentral()
+   }
+   dependencies {
+	   classpath 'com.h2database:h2:1.3.161'
+   }
+}
+
+/**
+ * Configure jettyRun, jettyRunWar and jettyStop tasks.
+ */
+[jettyRun, jettyRunWar,jettyStop]*.with {
+  jettyEnvXml = file('src/test/resources/jetty-env.xml')
+  httpPort = 8222
+  stopPort = 19742
+}
+
+/** 
+ * Run the h2 server before jetty starts up
+ */
+[jettyRun, jettyRunWar]*.doFirst {
+	org.h2.tools.Server.main()
+}
