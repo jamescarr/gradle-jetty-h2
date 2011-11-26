@@ -18,6 +18,7 @@ public class EmployeeController {
 	public String index() {
 		return "/employee/index";
 	}
+	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Employee employee) {
 		employees.save(employee);

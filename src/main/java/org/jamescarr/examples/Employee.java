@@ -1,10 +1,8 @@
 package org.jamescarr.examples;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 public class Employee {
-	@NotBlank private String firstName;
-	@NotBlank private String lastName;
+	private String firstName;
+	private String lastName;
 
 	public String getFirstName() {
 		return firstName;
