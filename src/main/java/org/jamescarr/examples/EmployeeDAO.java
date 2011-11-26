@@ -5,25 +5,25 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmployeeDAO {
-	private JdbcTemplate template;
+	private final JdbcTemplate template;
 	
 	@Autowired
-	public void init(DataSource dataSource){
+	public EmployeeDAO(DataSource dataSource){
 		template = new JdbcTemplate(dataSource);
 	}
 	
-	void save(Employee employee){
-		template.update("INSERT INTO employees (first_name, last_name) VALUES (?, ?)",
-				employee.getFirstName(), employee.getLastName());
+	public void save(Employee employee){
+		String sql = "INSERT INTO employees (first_name, last_name) VALUES (?, ?)";
+		template.update(sql, employee.getFirstName(), employee.getLastName());
 	}
 	
 	public List<Employee> getAll(){
-		return template.query("SELECT * FROM employees", ParameterizedBeanPropertyRowMapper.newInstance(Employee.class));
+		return template.query("SELECT * FROM employees", BeanPropertyRowMapper.newInstance(Employee.class));
 	}
 }
