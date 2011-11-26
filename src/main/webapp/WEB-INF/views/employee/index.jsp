@@ -16,17 +16,17 @@
 <script>
 $(document).ready(function(){
 	$.getJSON("list", function(data) {
-			var items = [];
-	
-			$.each(data, function(index, value) {
-				items.push('<li>' + value.firstName + ' ' + value.lastName + '</li>');
-			});
-			
-			$('<ul/>', {
-				'class' : 'employee-list',
-				html : items.join('')
-			}).appendTo('body');
+		var items = [];
+
+		$.each(data, function(index, value) {
+			items.push('<li>' + value.firstName + ' ' + value.lastName + '</li>');
 		});
+		
+		$('<ul/>', {
+			'class' : 'employee-list',
+			html : items.join('')
+		}).appendTo('body');
 	});
+});
 </script>
 </html>
