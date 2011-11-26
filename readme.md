@@ -15,4 +15,13 @@ The file jetty-env.xml configures a single h2 datasource using the tcp
 server (so that you can use the interactive console) and runs the init
 script at src/test/resources/create.sql.
 
+## Running the Example
+From the project root type 
+
+  gradle jettyRun
+
+To spin up the embedded jetty server. Navigate to
+http://localhost:8222/gradle-jetty-jndi-example/ to see it in action.
+
+
 Have fun!
