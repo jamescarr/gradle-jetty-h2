@@ -10,23 +10,20 @@
 	<input type="submit" value="Add Employee"/>
 </form>
 
-<div id="employees">
-</div>
-
 <script>
-$(document).ready(function(){
-	$.getJSON("list", function(data) {
-		var items = [];
-
-		$.each(data, function(index, value) {
-			items.push('<li>' + value.firstName + ' ' + value.lastName + '</li>');
+	$(document).ready(function(){
+		$.getJSON("list", function(data) {
+			var items = [];
+	
+			$.each(data, function(index, value) {
+				items.push('<li>' + value.firstName + ' ' + value.lastName + '</li>');
+			});
+			
+			$('<ul/>', {
+				'class' : 'employee-list',
+				html : items.join('')
+			}).appendTo('body');
 		});
-		
-		$('<ul/>', {
-			'class' : 'employee-list',
-			html : items.join('')
-		}).appendTo('body');
 	});
-});
 </script>
 </html>
