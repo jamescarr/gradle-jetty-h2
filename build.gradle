@@ -7,11 +7,11 @@ repositories {
 	mavenCentral()
 }
 
-slf4jVersion = '1.6.1'
+
 dependencies {
   // dependencies for spring mvc
-  compile 'org.springframework:spring-webmvc:3.0.6.RELEASE'
-  compile 'org.springframework:spring-jdbc:3.0.6.RELEASE'
+  compile "org.springframework:spring-webmvc:$springVersion"
+  compile "org.springframework:spring-jdbc:$springVersion"
   compile 'cglib:cglib:2.2.2'
 
   // json support
@@ -20,10 +20,10 @@ dependencies {
   // slf4j so we can have some awesome logging
   compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
   compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
-  runtime 'log4j:log4j:1.2.16'
+  runtime "log4j:log4j:$log4jVersion"
   
   // runtime dependency on h2 so jetty can load it into jndi
-  providedRuntime 'com.h2database:h2:1.3.161'
+  providedRuntime "com.h2database:h2:$h2Version"
   providedRuntime 'commons-dbcp:commons-dbcp:1.4'
 }
 
@@ -36,7 +36,7 @@ buildscript {
 	   mavenCentral()
    }
    dependencies {
-	   classpath 'com.h2database:h2:1.3.161'
+	   classpath "com.h2database:h2:$h2Version"
    }
 }
 
