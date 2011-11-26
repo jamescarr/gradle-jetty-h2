@@ -1,7 +1,8 @@
 package org.jamescarr.examples;
 
 public class Employee {
-	private String firstName, lastName;
+	private String firstName;
+	private String lastName;
 
 	public String getFirstName() {
 		return firstName;
